@@ -1,16 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>
-      Encrypt HTML AES-256
-    </title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
-    <style>
-      :root {
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Encrypt HTML AES-256 </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
   --bg-main: #090d16;
   --bg-card: #111827;
   --bg-input: #1f2937;
@@ -23,7 +22,7 @@
 }
 
 body {
-  font-family: &#39;Plus Jakarta Sans&#39;, sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--bg-main);
   margin: 0;
   padding: 40px 24px;
@@ -84,7 +83,7 @@ header h1 {
 }
 
 .panel-title::before {
-  content: &#39;&#39;;
+  content: '';
   display: inline-block;
   width: 6px;
   height: 6px;
@@ -127,7 +126,7 @@ textarea:focus, input:focus {
 
 textarea {
   min-height: 280px;
-  font-family: &#39;JetBrains Mono&#39;, monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
   resize: vertical;
   line-height: 1.6;
@@ -186,7 +185,7 @@ pre {
   border-radius: 10px;
   height: 120px;
   overflow: auto;
-  font-family: &#39;JetBrains Mono&#39;, monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   border: 1px solid rgba(255,255,255,0.05);
   line-height: 1.5;
@@ -243,96 +242,74 @@ footer {
   text-align: center;
   letter-spacing: 0.3px;
 }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <h1>
-          Encrypt HTML AES-256
-        </h1>
-      </header>
-      <div class="studio-grid">
-        <div class="panel">
-          <div class="panel-title">
-            Configuración y Origen
-          </div>
-          <div class="form-group">
-            <label for="html">
-              Código HTML a proteger
-            </label>
-            <textarea id="html" placeholder="Pega tu código HTML / Player aquí...">
-            </textarea>
-          </div>
-          <div class="form-group">
-            <label for="pw">
-              Contraseña de cifrado
-            </label>
-            <input id="pw" type="password" autocomplete="new-password" placeholder="Introduce tu contraseña (no se pedirá al usuario)" />
-          </div>
-          <div class="btn-group">
-            <button id="gen">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
-                </path>
-              </svg>
-              Generar Snippet Autoejecutable
-            </button>
-          </div>
-        </div>
-        <div class="panel">
-          <div class="panel-title">
-            Resultado y Vista Previa
-          </div>
-          <div class="form-group">
-            <label>
-              Código Compilado
-            </label>
-            <pre id="out">
-              // El snippet cifrado aparecerá aquí...
-            </pre>
-          </div>
-          <div class="btn-group" style="margin-bottom: 12px;">
-            <button id="copy" class="secondary">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3">
-                </path>
-              </svg>
-              Copiar Código
-            </button>
-            <button id="previewBtn" class="secondary">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                </path>
-                <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                </path>
-              </svg>
-              Interpretar Preview
-            </button>
-          </div>
-          <label>
-            Entorno Sandbox (Estricto 16:9)
-          </label>
-          <div class="preview-ratio-wrapper">
-            <iframe id="sandbox" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals" allow="autoplay; fullscreen; encrypted-media; picture-in-picture; orientation-lock; screen-wake-lock;">
-            </iframe>
-          </div>
-        </div>
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Encrypt HTML AES-256 </h1>
+  </header>
+
+  <div class="studio-grid">
+    <div class="panel">
+      <div class="panel-title">Configuración y Origen</div>
+      <div class="form-group">
+        <label for="html">Código HTML a proteger</label>
+        <textarea id="html" placeholder="Pega tu código HTML / Player aquí..."></textarea>
       </div>
-      <footer>
-        Encrypt HTML AES-256 · Reproducción transparente sin prompt + Máxima ofuscación cliente.
-      </footer>
+      <div class="form-group">
+        <label for="pw">Contraseña de cifrado</label>
+        <input id="pw" type="password" autocomplete="new-password" placeholder="Introduce tu contraseña (no se pedirá al usuario)">
+      </div>
+      <div class="btn-group">
+        <button id="gen">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          Generar Snippet Autoejecutable
+        </button>
+      </div>
     </div>
-    <div id="toast" class="toast">
-      ¡Mensaje del sistema!
+
+    <div class="panel">
+      <div class="panel-title">Resultado y Vista Previa</div>
+      <div class="form-group">
+        <label>Código Compilado</label>
+        <pre id="out">// El snippet cifrado aparecerá aquí...</pre>
+      </div>
+      <div class="btn-group" style="margin-bottom: 12px;">
+        <button id="copy" class="secondary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+          Copiar Código
+        </button>
+        <button id="previewBtn" class="secondary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          Interpretar Preview
+        </button>
+      </div>
+
+      <label>Entorno Sandbox (Estricto 16:9)</label>
+      <div class="preview-ratio-wrapper">
+        <iframe id="sandbox"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+                allow="autoplay; fullscreen; encrypted-media; picture-in-picture; orientation-lock; screen-wake-lock;"></iframe>
+      </div>
     </div>
-    <script>
-      function toUrlSafe(b64){ return b64.replace(/\+/g,&#39;-&#39;).replace(/\//g,&#39;_&#39;).replace(/=+$/,&#39;&#39;); }
+  </div>
+
+  <footer>
+    Encrypt HTML AES-256 &middot; Reproducción transparente sin prompt + Máxima ofuscación cliente.
+  </footer>
+</div>
+
+<div id="toast" class="toast">¡Mensaje del sistema!</div>
+
+<script>
+function toUrlSafe(b64){ return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
 function arrayBufferToBase64(buffer){
   const bytes = new Uint8Array(buffer);
-  let binary = &#39;&#39;;
+  let binary = '';
   const chunk = 0x8000;
-  for (let i = 0; i &lt; bytes.length; i += chunk) {
+  for (let i = 0; i < bytes.length; i += chunk) {
     binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
   }
   return btoa(binary);
@@ -344,111 +321,111 @@ async function encryptHtmlAutoExec(html, pw) {
   const seedBytes = enc.encode(pw);
   
   // SHA-256 de la contraseña
-  const hashBuffer = await crypto.subtle.digest(&#39;SHA-256&#39;, seedBytes);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', seedBytes);
   const keyArray = new Uint8Array(hashBuffer);
   
-  const key = await crypto.subtle.importKey(&#39;raw&#39;, keyArray, &#39;AES-GCM&#39;, false, [&#39;encrypt&#39;, &#39;decrypt&#39;]);
+  const key = await crypto.subtle.importKey('raw', keyArray, 'AES-GCM', false, ['encrypt', 'decrypt']);
   const iv = crypto.getRandomValues(new Uint8Array(12));
   
-  const cipher = await crypto.subtle.encrypt({name:&#39;AES-GCM&#39;, iv}, key, enc.encode(html));
+  const cipher = await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, enc.encode(html));
   const ivB64 = toUrlSafe(arrayBufferToBase64(iv.buffer));
   const ctB64 = toUrlSafe(arrayBufferToBase64(cipher));
   
   // Máscara XOR multinivel
   const mask = [0x5A, 0xA5, 0x3F, 0xC1, 0x7E, 0x91];
-  const obfuscatedKey = Array.from(keyArray).map((b, i) =&gt; b ^ mask[i % mask.length]);
+  const obfuscatedKey = Array.from(keyArray).map((b, i) => b ^ mask[i % mask.length]);
 
   // Código runtime optimizado y empaquetado para reproducirse solo
   const runtime = `(async function(){
   try {
     // Anti-Debugging ligero para obstaculizar F12
-    setInterval(()=&gt;{
+    setInterval(()=>{
       const _t=performance.now();
-      (function(){}).constructor(&#39;debugger&#39;)();
-      if(performance.now()-_t&gt;100){ document.body.innerHTML=&#39;&#39;; }
+      (function(){}).constructor('debugger')();
+      if(performance.now()-_t>100){ document.body.innerHTML=''; }
     },1500);
 
     const _c = document.currentScript.previousElementSibling;
     const _m = [0x5A, 0xA5, 0x3F, 0xC1, 0x7E, 0x91];
-    const _rk = new Uint8Array([${obfuscatedKey.join(&#39;,&#39;)}].map((b,i)=&gt;b^_m[i%_m.length]));
-    const _k = await crypto.subtle.importKey(&#39;raw&#39;,_rk,&#39;AES-GCM&#39;,false,[&#39;decrypt&#39;]);
-    const _b64 = (str) =&gt; Uint8Array.from(atob(str.replace(/-/g,&#39;+&#39;).replace(/_/g,&#39;/&#39;)), x=&gt;x.charCodeAt(0));
-    const _db = await crypto.subtle.decrypt({name:&#39;AES-GCM&#39;,iv:_b64(_c.dataset.iv)},_k,_b64(_c.dataset.ct));
+    const _rk = new Uint8Array([${obfuscatedKey.join(',')}].map((b,i)=>b^_m[i%_m.length]));
+    const _k = await crypto.subtle.importKey('raw',_rk,'AES-GCM',false,['decrypt']);
+    const _b64 = (str) => Uint8Array.from(atob(str.replace(/-/g,'+').replace(/_/g,'/')), x=>x.charCodeAt(0));
+    const _db = await crypto.subtle.decrypt({name:'AES-GCM',iv:_b64(_c.dataset.iv)},_k,_b64(_c.dataset.ct));
     
     let _h = new TextDecoder().decode(_db);
-    const _fix = &#39;&lt;style&gt;html,body{margin:0;padding:0;width:100%;height:100%;background:transparent;overflow:hidden;} #flow-player{width:100%!important;height:100%!important;max-width:100%!important;margin:0!important;border-radius:0!important;}&lt;/style&gt;&#39;;
-    _h = _h.replace(&#39;&lt;/head&gt;&#39;, _fix + &#39;&lt;/head&gt;&#39;);
+    const _fix = '<style>html,body{margin:0;padding:0;width:100%;height:100%;background:transparent;overflow:hidden;} #flow-player{width:100%!important;height:100%!important;max-width:100%!important;margin:0!important;border-radius:0!important;}</style>';
+    _h = _h.replace('</head>', _fix + '</head>');
 
-    const _f = document.createElement(&#39;iframe&#39;);
-    _f.style = &#39;width:100%;height:100%;border:none;display:block;margin:0;padding:0;position:absolute;top:0;left:0;&#39;;
-    _f.setAttribute(&#39;allow&#39;,&#39;autoplay;fullscreen;encrypted-media;orientation-lock;screen-wake-lock;&#39;);
+    const _f = document.createElement('iframe');
+    _f.style = 'width:100%;height:100%;border:none;display:block;margin:0;padding:0;position:absolute;top:0;left:0;';
+    _f.setAttribute('allow','autoplay;fullscreen;encrypted-media;orientation-lock;screen-wake-lock;');
     _f.srcdoc = _h;
     _c.appendChild(_f);
   } catch(e){}
 })();`;
 
-  return `&lt;div class=&#34;aes-v&#34; data-iv=&#34;${ivB64}&#34; data-ct=&#34;${ctB64}&#34; style=&#34;width:100%;display:block;position:relative;aspect-ratio:16/9;background:transparent;margin:0 auto;overflow:hidden;border-radius:10px;&#34;&gt;&lt;/div&gt;&lt;script&gt;${runtime}&lt;\/script&gt;`;
+  return `<div class="aes-v" data-iv="${ivB64}" data-ct="${ctB64}" style="width:100%;display:block;position:relative;aspect-ratio:16/9;background:transparent;margin:0 auto;overflow:hidden;border-radius:10px;"></div><script>${runtime}<\/script>`;
 }
 
-const genBtn = document.getElementById(&#39;gen&#39;);
-const copyBtn = document.getElementById(&#39;copy&#39;);
-const previewBtn = document.getElementById(&#39;previewBtn&#39;);
-const outEl = document.getElementById(&#39;out&#39;);
-const sandbox = document.getElementById(&#39;sandbox&#39;);
-const toast = document.getElementById(&#39;toast&#39;);
+const genBtn = document.getElementById('gen');
+const copyBtn = document.getElementById('copy');
+const previewBtn = document.getElementById('previewBtn');
+const outEl = document.getElementById('out');
+const sandbox = document.getElementById('sandbox');
+const toast = document.getElementById('toast');
 
 function showToast(message) {
   toast.textContent = message;
-  toast.classList.add(&#39;show&#39;);
-  setTimeout(() =&gt; {
-    toast.classList.remove(&#39;show&#39;);
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
   }, 2500);
 }
 
-genBtn.addEventListener(&#39;click&#39;, async () =&gt; {
-  const html = document.getElementById(&#39;html&#39;).value;
-  const pw = document.getElementById(&#39;pw&#39;).value;
-  if (!html || !pw) { showToast(&#39;⚠️ Por favor introduce HTML y Contraseña&#39;); return; }
+genBtn.addEventListener('click', async () => {
+  const html = document.getElementById('html').value;
+  const pw = document.getElementById('pw').value;
+  if (!html || !pw) { showToast('⚠️ Por favor introduce HTML y Contraseña'); return; }
   try {
     genBtn.disabled = true;
-    genBtn.textContent = &#39;Cifrando datos...&#39;;
+    genBtn.textContent = 'Cifrando datos...';
     const snip = await encryptHtmlAutoExec(html, pw);
     outEl.textContent = snip;
-    showToast(&#39;⚡ Snippet autoejecutable generado&#39;);
+    showToast('⚡ Snippet autoejecutable generado');
   } catch(e) {
-    showToast(&#39;❌ Error al encriptar&#39;);
+    showToast('❌ Error al encriptar');
   } finally {
     genBtn.disabled = false;
-    genBtn.innerHTML = `&lt;svg width=&#34;16&#34; height=&#34;16&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path d=&#34;M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z&#34;/&gt;&lt;/svg&gt; Generar Snippet Autoejecutable`;
+    genBtn.innerHTML = `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg> Generar Snippet Autoejecutable`;
   }
 });
 
-copyBtn.addEventListener(&#39;click&#39;, async () =&gt; {
+copyBtn.addEventListener('click', async () => {
   const txt = outEl.textContent;
-  if (!txt || txt.startsWith(&#39;//&#39;)) { showToast(&#39;⚠️ No hay ningún código para copiar&#39;); return; }
+  if (!txt || txt.startsWith('//')) { showToast('⚠️ No hay ningún código para copiar'); return; }
   try {
     await navigator.clipboard.writeText(txt);
-    showToast(&#39;📋 ¡Copiado al portapapeles!&#39;);
+    showToast('📋 ¡Copiado al portapapeles!');
   } catch {
-    showToast(&#39;❌ Error al copiar, hazlo manualmente&#39;);
+    showToast('❌ Error al copiar, hazlo manualmente');
   }
 });
 
-previewBtn.addEventListener(&#39;click&#39;, () =&gt; {
+previewBtn.addEventListener('click', () => {
   const snippet = outEl.textContent;
-  if (!snippet || snippet.startsWith(&#39;//&#39;)) { showToast(&#39;⚠️ Genera el snippet primero&#39;); return; }
+  if (!snippet || snippet.startsWith('//')) { showToast('⚠️ Genera el snippet primero'); return; }
   
-  const wrapper = `&lt;!doctype html&gt;
-&lt;html lang=&#34;es&#34; style=&#34;height:100%;width:100%;margin:0;padding:0;background:transparent;overflow:hidden;&#34;&gt;
-&lt;head&gt;&lt;meta name=&#34;viewport&#34; content=&#34;width=device-width,initial-scale=1&#34;&gt;&lt;/head&gt;
-&lt;body style=&#34;margin:0;padding:0;height:100%;width:100%;background:transparent;display:block;&#34;&gt;
+  const wrapper = `<!doctype html>
+<html lang="es" style="height:100%;width:100%;margin:0;padding:0;background:transparent;overflow:hidden;">
+<head><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;height:100%;width:100%;background:transparent;display:block;">
   ${snippet}
-&lt;/body&gt;
-&lt;/html&gt;`;
+</body>
+</html>`;
   
   sandbox.srcdoc = wrapper;
-  showToast(&#39;👁️ Vista previa renderizada&#39;);
+  showToast('👁️ Vista previa renderizada');
 });
-    </script>
-  </body>
+</script>
+</body>
 </html>
