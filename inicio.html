@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Encrypt HTML AES-256 </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-main: #090d16;
+  --bg-card: #111827;
+  --bg-input: #1f2937;
+  --border-color: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-success: #10b981;
+}
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg-main);
+  margin: 0;
+  padding: 40px 24px;
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #fff 0%, #9ca3af 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.studio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .studio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.panel-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-title::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+}
+.form-group {
+  margin-bottom: 20px;
+}
+textarea, input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  color: #fff;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+textarea:focus, input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+textarea {
+  min-height: 280px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  resize: vertical;
+  line-height: 1.6;
+}
+.btn-group {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+}
+button {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+button:hover {
+  background: var(--accent-hover);
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+button.secondary {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+button.secondary:hover {
+  background: var(--bg-input);
+  border-color: var(--text-muted);
+}
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: #070a12;
+  color: #38bdf8;
+  padding: 16px;
+  border-radius: 10px;
+  height: 120px;
+  overflow: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  border: 1px solid rgba(255,255,255,0.05);
+  line-height: 1.5;
+}
+.preview-ratio-wrapper {
+  width: 100%;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: transparent;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  margin-top: 10px;
+}
+.preview-ratio-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--accent-success);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 1000;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+footer {
+  margin-top: 40px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Encrypt HTML AES-256 </h1>
+  </header>
+  <div class="studio-grid">
+    <div class="panel">
+      <div class="panel-title">Configuración y Origen</div>
+      <div class="form-group">
+        <label for="html">Código HTML a proteger</label>
+        <textarea id="html" placeholder="Pega tu código HTML / Player aquí..."></textarea>
+      </div>
+      <div class="form-group">
+        <label for="pw">Contraseña de cifrado</label>
+        <input id="pw" type="password" autocomplete="new-password" placeholder="Introduce tu contraseña (no se pedirá al usuario)">
+      </div>
+      <div class="btn-group">
+        <button id="gen">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          Generar Snippet Autoejecutable
+        </button>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Resultado y Vista Previa</div>
+      <div class="form-group">
+        <label>Código Compilado</label>
+        <pre id="out">// El snippet cifrado aparecerá aquí...</pre>
+      </div>
+      <div class="btn-group" style="margin-bottom: 12px;">
+        <button id="copy" class="secondary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+          Copiar Código
+        </button>
+        <button id="previewBtn" class="secondary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          Interpretar Preview
+        </button>
+      </div>
+      <label>Entorno Sandbox (Estricto 16:9)</label>
+      <div class="preview-ratio-wrapper">
+        <iframe id="sandbox"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+                allow="autoplay; fullscreen; encrypted-media; picture-in-picture; orientation-lock; screen-wake-lock;"></iframe>
+      </div>
+    </div>
+  </div>
+  <footer>
+    Encrypt HTML AES-256 · Reproducción transparente sin prompt + Máxima ofuscación cliente.
+  </footer>
+</div>
+<div id="toast" class="toast">¡Mensaje del sistema!</div>
+<script>
+function toUrlSafe(b64){ return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+function arrayBufferToBase64(buffer){
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  const chunk = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunk) {
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+  }
+  return btoa(binary);
+}
+// Cifra el HTML y empaqueta el script de auto-reproducción usando la contraseña
+async function encryptHtmlAutoExec(html, pw) {
+  const enc = new TextEncoder();
+  const seedBytes = enc.encode(pw);
+  
+  // SHA-256 de la contraseña
+  const hashBuffer = await crypto.subtle.digest('SHA-256', seedBytes);
+  const keyArray = new Uint8Array(hashBuffer);
+  
+  const key = await crypto.subtle.importKey('raw', keyArray, 'AES-GCM', false, ['encrypt', 'decrypt']);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  
+  const cipher = await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, enc.encode(html));
+  const ivB64 = toUrlSafe(arrayBufferToBase64(iv.buffer));
+  const ctB64 = toUrlSafe(arrayBufferToBase64(cipher));
+  
+  // Máscara XOR multinivel
+  const mask = [0x5A, 0xA5, 0x3F, 0xC1, 0x7E, 0x91];
+  const obfuscatedKey = Array.from(keyArray).map((b, i) => b ^ mask[i % mask.length]);
+  // Código runtime optimizado y empaquetado para reproducirse solo
+  const runtime = `(async function(){
+  try {
+    // Anti-Debugging ligero para obstaculizar F12
+    setInterval(()=>{
+      const _t=performance.now();
+      (function(){}).constructor('debugger')();
+      if(performance.now()-_t>100){ document.body.innerHTML=''; }
+    },1500);
+    const _c = document.currentScript.previousElementSibling;
+    const _m = [0x5A, 0xA5, 0x3F, 0xC1, 0x7E, 0x91];
+    const _rk = new Uint8Array([${obfuscatedKey.join(',')}].map((b,i)=>b^_m[i%_m.length]));
+    const _k = await crypto.subtle.importKey('raw',_rk,'AES-GCM',false,['decrypt']);
+    const _b64 = (str) => Uint8Array.from(atob(str.replace(/-/g,'+').replace(/_/g,'/')), x=>x.charCodeAt(0));
+    const _db = await crypto.subtle.decrypt({name:'AES-GCM',iv:_b64(_c.dataset.iv)},_k,_b64(_c.dataset.ct));
+    
+    let _h = new TextDecoder().decode(_db);
+    const _fix = '<style>html,body{margin:0;padding:0;width:100%;height:100%;background:transparent;overflow:hidden;} #flow-player{width:100%!important;height:100%!important;max-width:100%!important;margin:0!important;border-radius:0!important;}</style>';
+    _h = _h.replace('</head>', _fix + '</head>');
+    const _f = document.createElement('iframe');
+    _f.style = 'width:100%;height:100%;border:none;display:block;margin:0;padding:0;position:absolute;top:0;left:0;';
+    _f.setAttribute('allow','autoplay;fullscreen;encrypted-media;orientation-lock;screen-wake-lock;');
+    _f.srcdoc = _h;
+    _c.appendChild(_f);
+  } catch(e){}
+})();`;
+  return `<div class="aes-v" data-iv="${ivB64}" data-ct="${ctB64}" style="width:100%;display:block;position:relative;aspect-ratio:16/9;background:transparent;margin:0 auto;overflow:hidden;border-radius:10px;"></div><script>${runtime}<\/script>`;
+}
+const genBtn = document.getElementById('gen');
+const copyBtn = document.getElementById('copy');
+const previewBtn = document.getElementById('previewBtn');
+const outEl = document.getElementById('out');
+const sandbox = document.getElementById('sandbox');
+const toast = document.getElementById('toast');
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2500);
+}
+genBtn.addEventListener('click', async () => {
+  const html = document.getElementById('html').value;
+  const pw = document.getElementById('pw').value;
+  if (!html || !pw) { showToast('⚠️ Por favor introduce HTML y Contraseña'); return; }
+  try {
+    genBtn.disabled = true;
+    genBtn.textContent = 'Cifrando datos...';
+    const snip = await encryptHtmlAutoExec(html, pw);
+    outEl.textContent = snip;
+    showToast('⚡ Snippet autoejecutable generado');
+  } catch(e) {
+    showToast('❌ Error al encriptar');
+  } finally {
+    genBtn.disabled = false;
+    genBtn.innerHTML = `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg> Generar Snippet Autoejecutable`;
+  }
+});
+copyBtn.addEventListener('click', async () => {
+  const txt = outEl.textContent;
+  if (!txt || txt.startsWith('//')) { showToast('⚠️ No hay ningún código para copiar'); return; }
+  try {
+    await navigator.clipboard.writeText(txt);
+    showToast('📋 ¡Copiado al portapapeles!');
+  } catch {
+    showToast('❌ Error al copiar, hazlo manualmente');
+  }
+});
+previewBtn.addEventListener('click', () => {
+  const snippet = outEl.textContent;
+  if (!snippet || snippet.startsWith('//')) { showToast('⚠️ Genera el snippet primero'); return; }
+  
+  const wrapper = `<!doctype html>
+<html lang="es" style="height:100%;width:100%;margin:0;padding:0;background:transparent;overflow:hidden;">
+<head><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;height:100%;width:100%;background:transparent;display:block;">
+  ${snippet}
+</body>
+</html>`;
+  
+  sandbox.srcdoc = wrapper;
+  showToast('👁️ Vista previa renderizada');
+});
+</script>
+</body>
+</html>
